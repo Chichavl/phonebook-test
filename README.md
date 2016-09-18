@@ -2,28 +2,37 @@
 This phonebook example showcases CRUD application implemented on Javascript stack using MVC pattern.
 
 ## Enchancements
-Implement linter
-Implement auth
-Implement logging to papertrail
-Mobile look
-Pagination
+- Implement linter
+- Implement auth
+- Implement logging to papertrail
+- Mobile look
+- Pagination
 
 ## Database schema
 
-var phoneSchema = new Schema({
-	surname: String,
-	name: String,
-	middleName: String,
-	city: String,
-	street: String,
-	dob: Date,
-	phone: String
-});
+### phone collection schema
 
-var citySchema = new Schema({
-	name: String,
-	street: [String]
-});
+Main table to store phone book data
+
+Name | Type | Description 
+--- | --- | ---
+surname | String | Surname of person
+name | String | Name of person
+middleName | String | Middle name of pesron
+city | String | City of person
+street | String | Street of person
+dob | Date | Date of birth of person
+phone | String | Phone of person
+
+### city collection schema
+
+Table to store hierarchy of all cities with streets 
+
+Name | Type | Description 
+--- | --- | ---
+_id | String | City name
+street | Array of Strings | Array of streets of the city
+
 
 ## Api routes
 
@@ -44,11 +53,3 @@ Route |	HTTP Verb |	Description
 ## Live demo
 
 Live demo is aviable on [heroku](https://phonebook-test-chichavl.herokuapp.com/)
-
-## Running the server
-
-You can launch the app from the Terminal:
-
-    $ npm start
-
-Once the server is running, open the project in the shape of 'https://projectname-username.c9.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
