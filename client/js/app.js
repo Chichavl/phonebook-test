@@ -10,7 +10,7 @@ var readRecords = function() {
             tableCode += '<tr><td>' + element.surname + " " + element.middleName + " " + element.name + '</rd>';
             tableCode += '<td>' + element.city + '</rd>';
             tableCode += '<td>' + element.street + '</rd>';
-            tableCode += '<td>' + element.dob + '</rd>';
+            tableCode += '<td>' + moment(element.dob).format('DD.MM.YYYY') + '</rd>';
             tableCode += '<td>' + element.phone + '</rd>';
             tableCode += '<td><button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#createModal" data-title="Edit record" data-id=' + '"' + element._id + '"' + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></rd>';
             tableCode += '<td><button class="btn btn-xs btn-danger" onClick="removeRecord(' + "'" + element._id + "'" + ')"><i class="fa fa-minus" aria-hidden="true"></i></button></rd></tr>';
@@ -33,7 +33,7 @@ var createRecord = function () {
         "middleName": $("#middleName").val(),
         "city": $("#city").val(),
         "street": $("#street").val(),
-        "dob": $("#dob").val(),
+        "dob": moment($("#dob").val(), "DD.MM.YYYY").format(),
         "phone": $("#phone").val()
     };
     console.log(record)
@@ -112,7 +112,7 @@ $('#createModal').on('show.bs.modal', function (event) {
             $("#middleName").val(data.msg[0].middleName),
             $("#city").html('<option value="'+ data.msg[0].city +'">' + data.msg[0].city + '</option>'),
             $("#street").html('<option value="'+ data.msg[0].street +'">' + data.msg[0].street + '</option>'),
-            $("#dob").val(data.msg[0].dob),
+            $("#dob").val(moment(data.msg[0].dob).format('DD.MM.YYYY')),
             $("#phone").val(data.msg[0].phone)
             
             modal.find('.modal-title').text(modalTitle)
