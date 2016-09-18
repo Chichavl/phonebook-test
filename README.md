@@ -7,6 +7,10 @@ This phonebook example showcases CRUD application implemented on Javascript stac
 - Implement logging to papertrail
 - Mobile look
 - Pagination
+- Add sorting to lists
+- Show error to user(now only console)
+- Form validation
+- refactor app.js
 
 ## Database schema
 
