@@ -86,6 +86,15 @@ $(document).ready(function () {
     readRecords();
 });
 
+$(function() {
+    $.datepicker.setDefaults( $.datepicker.regional[ "ru" ] );
+    $("#dob").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "c-106:c"
+    });
+  });
+
 
 $('#createModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
