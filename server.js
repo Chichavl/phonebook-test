@@ -14,7 +14,8 @@ app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/css', express.static(process.cwd() + '/client/css'));
 app.use('/js', express.static(process.cwd() + '/client/js'));
 app.use('/fonts', express.static(process.cwd() + '/client/fonts'));
-app.use('/css/images', express.static(process.cwd() + '/client/images'));
+app.use('/css/images', express.static(process.cwd() + '/client/css/images'));
+app.use('/images', express.static(process.cwd() + '/client/images'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())

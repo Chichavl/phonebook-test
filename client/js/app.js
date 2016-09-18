@@ -82,7 +82,17 @@ var removeRecord = function (id) {
 });
 }
 
+$(document).ajaxStart(function(){
+    $("#busy").show();
+});
+
+$(document).ajaxStop(function() {
+  $("#busy").hide();
+});
+    
+
 $(document).ready(function () {
+    $("#busy").hide();
     readRecords();
 });
 
