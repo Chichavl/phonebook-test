@@ -69,6 +69,7 @@ var createRecord = function () {
 }
 
 var removeRecord = function (id) {
+    //TODO Remove - ajax indicator added
     $("#result").html('<div class="text-center">Working...</div>');
     $.ajax({
     url: '/api/v1/phones/'+ id,
@@ -149,6 +150,10 @@ var readCities = function() {
   console.log(data);
     if (data.status == "Ok") {
         var code = '';
+        //walkaround to save currently selected item. This duplicates it in list
+        if ($("#city").val()) {
+            code += '<option value="' + $("#city").val() + '">' + $("#city").val() + '</option>'
+        }
         data.msg.forEach(function(element, index, array) {
             code += '<option value="' + element._id + '">' + element._id + '</option>';
         });
@@ -196,6 +201,10 @@ var readStreets = function() {
     console.log(data);
     if (data.status == "Ok") {
         var code = '';
+        //walkaround to save currently selected item. This duplicates it in list
+        if ($("#street").val()) {
+            code += '<option value="' + $("#street").val() + '">' + $("#street").val() + '</option>'
+        }
         data.msg.forEach(function(element, index, array) {
             code += '<option value="' + element + '">' + element + '</option>';
         });
