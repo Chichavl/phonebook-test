@@ -33,15 +33,17 @@ Route |	HTTP Verb |	Description
 /api/v1/phones/ | POST |Create a phone record.
 /api/v1/phones/:phone_id |	GET | Get a single phone record.
 /api/v1/phones/:phone_id |	PUT | Update a phone record with new info.
-/api/v1/phones/:phone_id |	DELETE | Delete a phone recordear.
+/api/v1/phones/:phone_id |	DELETE | Delete a phone record.
 --- | --- | ---
 /api/v1/cities/	| GET |	Get all the city records.
 /api/v1/cities/ | POST |Create a city record.
-/api/v1/cities/:city_id |	GET | Get a single city record.
+--- | --- | ---
+/api/v1/cities/:city_id/streets/ | GET |	Get all the streets records of paticular city.
+/api/v1/cities/:city_id/streets/ | POST |Create a streets record of paticular city.
 
 ## Live demo
 
-Live demo is aviable on heroku TODO: url here 
+Live demo is aviable on [heroku](https://phonebook-test-chichavl.herokuapp.com/)
 
 ## Running the server
 

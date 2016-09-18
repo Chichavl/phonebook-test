@@ -46,6 +46,7 @@ function ApiHandler () {
 	}
 	
 	this.updatePhone = function(req, res) {
+	    //TODO Change to findByIdAndUpdate
 	    Phone.findById(req.params.id, function (err, result) {
 	        if (err) {
 	            res.json({status:"Failed", msg: err})
@@ -92,30 +93,49 @@ function ApiHandler () {
 	    })
 	}
 	
-	this.getCity = function(req, res) {
-	    City.find({_id: req.params.id}, function (err, result) {
-	        if (err) {
-	            res.json({status:"Failed", msg: err})
-	        } else {
-	            res.json({status:"Ok", msg: result});
-	        }
-	    })
-	}
-
 	this.addCity = function (req, res) {
 	    var record = new City({
-            					"name": req.body.name,
+            					"_id": req.body._id,
                             	"street": []
             				});
         record.save(function (err) {
             if (err) {
-                res.json({status:"Failed", msg: err})
+                if (err.name === 'MongoError' && err.code === 11000) {
+			        // Duplicate city name
+			        res.json({status:"Failed", error: 'City already exists!' });
+                }
+                else {
+                	res.json({status:"Failed", msg: err})
+                }
+                
             }
             else {
                 res.json({status:"Ok", msg: "Record saved!"})
             }
         })
 	}
+	
+	this.getStreets = function(req, res) {
+	    City.findById(req.params.city_id, function (err, result) {
+	        if (err) {
+	            res.json({status:"Failed", msg: err})
+	        } else {
+	            res.json({status:"Ok", msg: result.street});
+	        }
+	    })
+	}
+	
+	this.addStreet = function (req, res) {
+		City.findByIdAndUpdate(req.params.city_id, {$push: {street:req.body.street}},function (err, result) {
+	        if (err) {
+	            res.json({status:"Failed", msg: err})
+	            console.log(err);
+	        }
+	        else {
+				res.json({status:"Ok", msg: "Phone updated!"});
+	        }
+	            });
+	        }
 	
 	};
 module.exports = ApiHandler;

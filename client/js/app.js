@@ -131,12 +131,12 @@ var readCities = function() {
     if (data.status == "Ok") {
         var code = '';
         data.msg.forEach(function(element, index, array) {
-            code += '<option value="' + element.name + '">' + element.name + '</option>';
+            code += '<option value="' + element._id + '">' + element._id + '</option>';
         });
-        $("#city").append(code)
+        $("#city").html(code)
     }
     else {
-        $("#city").append('Api error');
+        $("#city").html('Api error');
         console.log(data.msg);
     }
 });  
@@ -151,13 +151,16 @@ $("#cityaddshowbtn").click(function(e){
 $("#cityaddbtn").click(function(e){
     e.preventDefault();
     var record = {
-        "name": $("#cityadd").val()
+        "_id": $("#cityadd").val()
     };
         // New record insert
         $.ajax({
         url: '/api/v1/cities/',
         type: 'POST',
         data: record,
+        error: function (error) {
+            console.log(error)
+        },
         success: function(result) {
             $("#cityadd").addClass('hidden');
             $("#cityaddbtn").addClass('hidden');
@@ -165,4 +168,53 @@ $("#cityaddbtn").click(function(e){
             console.log("City added")
         }
         });
+        
+        
+});
+
+var readStreets = function() {
+    $.getJSON('/api/v1/cities/'+ $("#city").val() +'/streets/', function(data) {
+    console.log(data);
+    if (data.status == "Ok") {
+        var code = '';
+        data.msg.forEach(function(element, index, array) {
+            code += '<option value="' + element + '">' + element + '</option>';
+        });
+        $("#street").html(code)
+    }
+    else {
+        $("#street").html('Api error');
+        console.log(data.msg);
+    }
+});  
+};
+
+$("#streetaddshowbtn").click(function(e){
+    e.preventDefault();
+    $("#streetadd").removeClass('hidden');
+    $("#streetaddbtn").removeClass('hidden');
+});
+
+$("#streetaddbtn").click(function(e){
+    e.preventDefault();
+    var record = {
+        "street": $("#streetadd").val()
+    };
+        // New record insert
+        $.ajax({
+        url: '/api/v1/cities/'+ $("#city").val() +'/streets/',
+        type: 'POST',
+        data: record,
+        error: function (error) {
+            console.log(error)
+        },
+        success: function(result) {
+            $("#streetadd").addClass('hidden');
+            $("#streetaddbtn").addClass('hidden');
+            $("#streetadd").val("")
+            console.log("Street added")
+        }
+        });
+        
+        
 });

@@ -33,6 +33,9 @@ module.exports = function (app) {
 	app.route('/api/v1/cities/')
 		.get(apiHandler.getCities);
 	
-	app.route('/api/v1/cities/:id')
-		.get(apiHandler.getCity);
+	app.route('/api/v1/cities/:city_id/streets/')
+		.post(apiHandler.addStreet);
+		
+	app.route('/api/v1/cities/:city_id/streets/')
+		.get(apiHandler.getStreets);
 };
